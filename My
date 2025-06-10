@@ -10,32 +10,6 @@ kubeadm token create --print-join-command
 
 
 
-Get-ADUser -Filter * -SearchBase
-
-"OU=YourOU,DC=YourDomain,DC=com"
-
--Properties * |
-
-Select-Object @{Name='Name';Expression
-
-={$_.Name}},
-
-@{Name=
-
-'Username';Expression={$
-
-.SamAccountName}},
-
-@{Name='Email';Expression
-
-={$_.mail}},
-
-@{Name=
-
-'Department';Expression={$
-
-.Department}} |
-
-Export-Csv -Path "C:\UsersList.csv"
-
--NoTypeInformation
+et-ADUser -Filter * -SearchBase $OU -Properties Enabled |
+Select-Object SamAccountName, Enabled |
+Export-Csv -Path "C:\AD_Users_Status.csv" -NoTypeInformation
